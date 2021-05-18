@@ -1,0 +1,8 @@
+<!doctype html>
+<title>{{ files["name"] }}</title>
+<h1>{{ files["name"] }}</h1>
+<ul>
+{%- for file in files["list"] %}
+    <li>{{ file }}
+{%- endfor %}
+</ul>
