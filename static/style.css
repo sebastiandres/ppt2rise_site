@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+    background-image: radial-gradient(
+      rgba(0, 150, 0, 0.75), black 120%
+    );
+    color: white;
+    font: Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+  }
+
+  h1 {
+    color: white;
+
+  }
+  ::selection {
+    background: #0080FF;
+    text-shadow: none;
+  }
+  pre {
+    margin: 0;
+  }

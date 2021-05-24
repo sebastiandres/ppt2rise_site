@@ -27,10 +27,52 @@ def make_archive(source, destination):
    shutil.make_archive(name, format, archive_from, archive_to)
    shutil.move('%s.%s'%(name,format), destination)
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def index():
-   return render_template('index.html')
-   
+   if request.method == 'POST':
+      # Get the file properties
+      f = request.files['file']
+      filename = secure_filename(f.filename)
+      basename = filename.replace(".pptx", "")
+      # Timestamp to dynamic path
+      timestamp_str = datetime.now().strftime("%Y-%b-%d-%H-%M-%S")
+      # Main path
+      global_path = os.getcwd()
+      # pptx files and paths
+      pptx_filename = filename
+      pptx_basepath = os.path.join(global_path, app.config['PPTX_PATH'])
+      pptx_filepath = os.path.join(pptx_basepath, pptx_filename)
+      print("pptx_filepath", pptx_filepath)
+      # ipynb files and paths
+      ipynb_filename = basename + ".ipynb"
+      ipynb_basepath = os.path.join(global_path, app.config['IPYNB_PATH'] , basename + timestamp_str)
+      ipynb_filepath = os.path.join(ipynb_basepath, ipynb_filename)
+      print("ipynb_filepath", ipynb_filepath)
+      # zip files and paths
+      zip_filename = basename + timestamp_str + ".zip"
+      zip_basepath = os.path.join(global_path, app.config['ZIP_PATH'])
+      zip_filepath = os.path.join(zip_basepath , zip_filename)
+      print("zip_filepath", zip_filepath)
+      try:
+         os.mkdir(ipynb_path)
+      except:
+         print("Dir exists?")
+      # Store in folder
+      f.save(pptx_filepath)
+      # Convert
+      ppt2rise.ppt2rise(pptx_filepath, ipynb_filepath)  
+      # Zip
+      make_archive(ipynb_basepath, zip_filepath)
+      # Offer to download it
+      return send_from_directory(zip_basepath, zip_filename, as_attachment=True)
+   else:
+      return render_template('index.html')
+
+@app.route('/faq')
+def faq():
+      return render_template('faq.html')
+
+"""  
 @app.route('/pptx_files')
 def pptx_files():
    pptx_files = {"name":"pptx files", "list":[]}
@@ -88,6 +130,7 @@ def uploaded():
       # Offer to download it
       #print(send_from_directory(directory=zip_basepath, filename=zip_filename))  
       return send_from_directory(zip_basepath, zip_filename, as_attachment=True)
+"""  
 
 		
 if __name__ == '__main__':

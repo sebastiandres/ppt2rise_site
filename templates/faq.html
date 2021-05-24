@@ -1,0 +1,36 @@
+<!doctype html>
+<head>
+    <title>Convertir a RISE | FAQ</title>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+ </head>
+
+<body>
+    <h1>FAQ - Preguntas Frecuentes</h1>
+    <h2>¿Qué es?</h2>
+    Es un servicio para convertir una presentación en formato pptx (Powerpoint - Microsoft Office) a jupyter notebook con la extensión RISE. 
+    <h2>¿Qué es jupyter notebook?</h2>
+    Es un formato que permite desarrollar código de manera interactiva, para distintos lenguajes: Julia, Python y R, entre otros. 
+    <h2>¿Qué es la extensión RISE?</h2>
+    Es una extensión para Jupyter Notebook que permite **presentar** el notebook como una presentación a pantalla completa. De esa manera, 
+    es posible presentar en charlas, conferencias o clases mostrando y ejecutando código. ¡Ya no es necesario pegar pantallazos de código! 
+    <a href="https://rise.readthedocs.io/">Link</a>
+    <h2>¿Cómo funciona?</h2>
+    La verdad es más sencillo de lo que parece. Una librería de python llamada python-pptx permite (entre otras cosas) abrir los archivos pptx,
+    con lo cual se extrae su contenido y se guarda en el formato requerido para jupyter notebook y la extensión RISE.
+    <h2>¿Porqué complicarse la vida?</h2>
+    El formato jupyter notebook + extensión RISE tiene muchas ventajas:
+    <ul>
+        <li>Interactividad. Es posible ejecutar código en directo, sin cambiar a un terminal.</li>
+        <li>Autocontenido. Datos, código y presentación quedan en un mismo archivo y repositorio. Es más fácil de compartir.</li>
+        <li>Múltiples formatos. Puedes compartir la presentación como un archivo ipynb para que otros exploren interactivamente, o como una presentación en formato html, o como un pdf.</li>
+        <li>Es software libre. No tiene costo.</li>
+      </ul>  
+    <h2>¿Cómo lo utilizo?</h2>
+    Está muy bien explicado en la página de RISE, pero en resumen, basta instalar RISE y usar el boton de "lanzar presentación":
+    </br></br>
+    <pre>
+    pip install RISE
+    </pre>
+</body>
+</html>

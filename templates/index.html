@@ -1,8 +1,23 @@
 <html>
+   <head>
+      <title>Convertir a RISE</title>
+      <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+   </head>
+      
+
    <body>
-      <h1>ppt to rise site</h1>
-      <p><a href="{{ url_for('upload') }}">Upload your files</a></p>
-      <p><a href="{{ url_for('pptx_files') }}">Uploaded pptx files</a></p>
-      <p><a href="{{ url_for('ipynb_files') }}">Converted ipynb files</a></p>
+      <h1>Convirtiendo una presentación a jupyter notebook + RISE</h1>
+      <h2>Convierte tu presentación</h2> 
+      Selecciona una presentación en formato pptx y obtén una versión equivalente en formato jupyter notebook + extensión RISE.
+      <div style="left: 150px;">
+         <form action = "/" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file"/>
+            </br>
+            <input type = "submit" value="Convertir"/>
+         </form>
+      </div>      
+      <h2>¿Dudas?</h2> 
+      Revisa las <a href="{{ url_for('faq') }}">preguntas frecuentes</a>.
    </body>
 </html>
