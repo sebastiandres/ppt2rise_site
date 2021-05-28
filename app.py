@@ -29,15 +29,19 @@ def make_archive(source, destination):
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-   if request.method == 'POST':
+   f = request.files['file']
+   filename = secure_filename(f.filename)
+   print(f"filename: {filename}")
+   if request.method == 'POST' and filename[-5:]==".pptx":
       # Get the file properties
-      f = request.files['file']
-      filename = secure_filename(f.filename)
       basename = filename.replace(".pptx", "")
       # Timestamp to dynamic path
       timestamp_str = datetime.now().strftime("%Y-%b-%d-%H-%M-%S")
       # Main path
       global_path = os.getcwd()
+      # Print the paths
+      print(f"basename: {basename}")
+      print(f"global_path: {global_path}")
       # pptx files and paths
       pptx_filename = filename
       pptx_basepath = os.path.join(global_path, app.config['PPTX_PATH'])
@@ -54,9 +58,10 @@ def index():
       zip_filepath = os.path.join(zip_basepath , zip_filename)
       print("zip_filepath", zip_filepath)
       try:
+         print("Creating ipynb directory.")
          os.mkdir(ipynb_path)
       except:
-         print("Dir exists?")
+         pass
       # Store in folder
       f.save(pptx_filepath)
       # Convert
