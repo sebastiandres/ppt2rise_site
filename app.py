@@ -6,10 +6,10 @@ import shutil
 from glob import glob
 from datetime import datetime
 
-app = Flask(__name__)
 # See
 # https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
 # https://j2logo.com/tutorial-flask-leccion-4-login/
+app = Flask(__name__)
 
 app.config['PPTX_PATH'] = 'files/pptx_files/'
 app.config['IPYNB_PATH'] = 'files/ipynb_files/'
