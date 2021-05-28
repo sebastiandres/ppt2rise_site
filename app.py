@@ -29,10 +29,12 @@ def make_archive(source, destination):
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-   f = request.files['file']
-   filename = secure_filename(f.filename)
-   print(f"filename: {filename}")
-   if request.method == 'POST' and filename[-5:]==".pptx":
+   if request.method == 'POST':
+      f = request.files['file']
+      filename = secure_filename(f.filename)
+      print(f"filename: {filename}")
+      if filename[-5:]!=".pptx":
+         return render_template('index.html')
       # Get the file properties
       basename = filename.replace(".pptx", "")
       # Timestamp to dynamic path
